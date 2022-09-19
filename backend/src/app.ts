@@ -1,10 +1,10 @@
 import express from "express";
 import "express-async-errors";
-import { Response, Request, NextFunction } from "express";
+import { Response, Request, NextFunction, Router } from "express";
 import cors from "cors";
 
 import { AppError } from "./shared/error";
-import Routes from "./shared/infra/http/routes";
+import { personRoutes } from "./modules/person";
 
 const app = express();
 
@@ -15,7 +15,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 // set routes
-app.use(Routes);
+const routes = Router();
+routes.use("/person", personRoutes);
+
+app.use(routes);
 
 // response for unknown requisitions
 app.use((req, res) => {

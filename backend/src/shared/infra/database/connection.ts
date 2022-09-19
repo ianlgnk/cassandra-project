@@ -8,7 +8,7 @@ const client = new cassandra.Client({
   keyspace: keyspace,
 });
 
-export async function query(cql: string, params?: string[]): Promise<any[]> {
+export async function query(cql: string, params?: string[]): Promise<any> {
   try {
     const response = client.execute(cql, params).then((res: any) => res);
     return response;
