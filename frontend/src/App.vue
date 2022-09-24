@@ -99,7 +99,7 @@
       </v-card>
     </v-dialog>
 
-    <v-snackbar v-model="snackbar" timeout="2000" color="warning">
+    <v-snackbar v-model="snackbar" timeout="4000" color="warning">
       {{ msg }}
 
       <template v-slot:action="{ attrs }">
@@ -136,6 +136,7 @@ export default {
     rules: {
       name: (val) => (val || "").length > 0 || "Campo obrigatório!",
       email: (val) => {
+        if ((val || "").length === 0) return "Campo Obrigatório";
         const pattern =
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return pattern.test(val) || "Email inválido!";
